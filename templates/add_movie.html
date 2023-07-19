@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Movie</title>
+</head>
+<body>
+    <form action="/users/{{ user_id }}/add_movie" method="POST">
+        <label for="title">Movie title: </label>
+        <input type="text" id="title" name="title" required>
+        <br>
+        <label><input type="checkbox" name="yesno" value="yes" checked>Add another movie to your favourites on the next page?</label>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Movie Info</title>
+</head>
+<body>
+    <form action="/users/{{ user_id }}/update_movie/{{ movie_id }}" method="POST">
+    <label for="title">Title: </label>
+    <input type="text" id="title" name="title" value="{{ movie_info['title'] }}" required>
+    <br>
+    <label for="name">Director: </label>
+    <input type="text" id="director" name="director" value="{{ movie_info['director'] }}" required>
+    <br>
+    <label for="content">Year of release: </label>
+    <input type="text" id="year" name="year" value="{{ movie_info['year'] }}" required>
+    <br>
+    <label for="content">Rating: </label>
+    <input type="text" id="rating" name="rating" value="{{ movie_info['rating'] }}" required>
+    <br>
+    <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

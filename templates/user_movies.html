@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user }}'s Movies</title>
+</head>
+<body>
+    <h1>{{ user }}'s Favourite Movies</h1> 
+    <p><a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('list_users') }}">Users</a>
+        <a href="{{ url_for('add_movie', user_id=user_id) }}">Add Movie</a></p>
+    {% for movie_id, movie in movies.items() %}
+    <div class="movie">
+        <h4>{{ movie['title'] }}</h4>
+        <p>Directed by {{ movie['director'] }}</p>
+        <p>Released in {{ movie['year'] }}</p>
+        <p>Rating: {{ movie['rating'] }}</p>
+        <p><a class='update moviebutton' href="{{ url_for('update_movie', user_id=user_id, movie_id=movie_id ) }}">Update</a>
+            <a class='delete moviebutton' href="{{ url_for('delete_movie', user_id=user_id, movie_id=movie_id ) }}">Delete</a></p>
+        <br>
+    </div>
+    {% endfor %}
+</body>
+</html>
