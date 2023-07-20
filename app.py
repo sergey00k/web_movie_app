@@ -7,7 +7,8 @@ data_manager = JsonDataManager("/Users/sk/Desktop/Masterschool/web_movie_app/dat
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    movies = data_manager.all_movies_randomly()
+    return render_template('home.html', movies=movies)
 
 @app.route('/users', methods=['GET', 'POST'])
 def list_users(flag=True):
@@ -21,7 +22,7 @@ def list_users(flag=True):
                 matched_users[user] = user_id
                 search_results += 1
         if search_results == 0:
-            return render_template('no_search_results.html')
+            return render_template('error.html', header='No Matches', message='Sorry, there are no users that match your search criteria.')
         else:
             return render_template('users.html', users=matched_users)
     else:
@@ -55,11 +56,11 @@ def add_movie(user_id):
         payload = {'apikey': '3d01cfe1', 't': title}
         response = requests.get('http://www.omdbapi.com/', params=payload)
         if response.status_code != 200:
-            return render_template('external_api_error.html')
+            return render_template('error.html', header='External api not responding', message='Sorry, the api for fetching movie information is not available,\n please try again later.')
         else:
             content = response.json()
         if 'Error' in content:
-            return render_template('external_api_error.html')
+            return render_template('error.html', header='Movie not found', message='Sorry, the movie you were looking for could not be found.')
         else:
             data_manager.add_movie(user_id, title, content['imdbRating'], content['Year'], content['Director'], content['Poster'])
         if 'yes' in checkbox_data:
@@ -95,7 +96,7 @@ def delete_user(user_id):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('error.html', header='Web Page Not Found', message='Sorry, the web page you are looking for could not be found,\n please check your spelling and try again.'), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

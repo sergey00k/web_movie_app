@@ -1,5 +1,6 @@
 from database.db_algos.db_algos_interface import DataManagerInterface as DMI
 import json
+import random
 
 class JsonDataManager(DMI):
     def __init__(self, file_path):
@@ -82,5 +83,26 @@ class JsonDataManager(DMI):
         del users[user_id]
         self.write_new_data(users)
         return "SUCCESS"
+    
+    def all_movies_randomly(self):
+        users = self.read_data()
+        list_of_movies = []
+        for user, value in users.items():
+            for movie_id, movie in value['movies'].items():
+                if movie not in list_of_movies:
+                    list_of_movies.append(movie)
+                else:
+                    continue
+        randomly = []
+        for movie in list_of_movies:
+            while True:
+                random_movie = random.choice(list_of_movies)
+                if random_movie in randomly:
+                    continue
+                else:
+                    randomly.append(random_movie)
+                    break
+        return randomly
+
     
 obj = JsonDataManager("/Users/sk/Desktop/Masterschool/web_movie_app/database.db/db_files/db.json")
