@@ -6,22 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie App Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='home_styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header">
-        <h1>My Movie App</h1>
-        <h4 class="users button"><a href="{{ url_for('list_users') }}">Users</a></h4>
-        <form action="/users" method="POST">
-            <label class="searchtext" for="search">Search for user by name: </label>
-            <input class="searchfield" type="text" id="search" name="search" required>
-            <br>
-            <input class="submit button" type="submit" value="Submit">
-        </form>
+        <h1 class="title">My Movie App</h1>
+        <div class="header-right">
+            <a class="users-button" href="{{ url_for('list_users') }}">All Users</a>
+            <form class="search-form" action="/users" method="POST">
+                <label class="search-text" for="search">Search for user by name: </label>
+                <input class="search-field" type="text" id="search" name="search" required>
+                <br>
+                <input class="submit button" type="submit" value="Search">
+            </form>
+        </div>
     </div>
-    <p class="hometext">Welcome to my movie application, feel free to create your own account and add all your favourite movies to its library,<br>or simply navigate using the header above to see other users movie libraries. <br>All data is automatically saved and stored inside a json file.</p>
+    <p class="hometext">Welcome to my movie application, feel free to create your own account
+         and add all your favourite movies to its library,<br>or simply navigate using the
+          header above to see other users movie libraries. <br>All data is automatically
+           saved and stored inside a json file.</p>
     <div class="image-container">
         {% for movie in movies %}
-        <img src="{{ movie['image_url'] }}">
+        <img src="{{ movie['image_url'] }}" class="image">
         {% endfor %}
     </div>
 </body>

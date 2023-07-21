@@ -1,47 +1,4 @@
 {
-  "1": {
-    "name": "Alice",
-    "movies": {
-      "3": {
-        "title": "titanic",
-        "director": "james cameron",
-        "year": "2000",
-        "rating": "8"
-      },
-      "1": {
-        "title": "ted",
-        "rating": "6.9",
-        "year": "2012",
-        "director": "Seth MacFarlane",
-        "image_url": "https://m.media-amazon.com/images/M/MV5BMTQ1OTU0ODcxMV5BMl5BanBnXkFtZTcwOTMxNTUwOA@@._V1_SX300.jpg"
-      },
-      "2": {
-        "title": "baby driver",
-        "rating": "7.6",
-        "year": "2017",
-        "director": "Edgar Wright",
-        "image_url": "https://m.media-amazon.com/images/M/MV5BMjM3MjQ1MzkxNl5BMl5BanBnXkFtZTgwODk1ODgyMjI@._V1_SX300.jpg"
-      },
-      "4": {
-        "title": "shutter island",
-        "rating": "8.2",
-        "year": "2010",
-        "director": "Martin Scorsese",
-        "image_url": "https://m.media-amazon.com/images/M/MV5BYzhiNDkyNzktNTZmYS00ZTBkLTk2MDAtM2U0YjU1MzgxZjgzXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
-      }
-    }
-  },
-  "2": {
-    "name": "Bob",
-    "movies": {
-      "1": {
-        "title": "titanic",
-        "director": "james cameron",
-        "year": "1997",
-        "rating": "8"
-      }
-    }
-  },
   "0": {
     "name": "sergey",
     "movies": {

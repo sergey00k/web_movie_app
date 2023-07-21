@@ -4,23 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='users_styles.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
     <title>Users - MovieWebApp</title>
 </head>
 <body>
-    <h1>Users</h1>
-    <p><a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('add_user') }}">Add User</a>
-        <form action="/users" method="POST">
-            <label for="search">Search for user by name: </label>
-            <input type="text" id="search" name="search" required>
-            <br>
-            <input type="submit" value="Submit">
-        </form></p>
+    <div class="header">
+        <div class="left-header">
+            <a class="home button" href="{{ url_for('home') }}">Home</a>
+            <a class="add button" href="{{ url_for('add_user') }}">Add User</a>
+        </div>
+        <div class="right-header">
+            <form class="search-form" action="/users" method="POST">
+                <label class="search-text" for="search">Search for user by name: </label>
+                <input class="search-field" type="text" id="search" name="search" required>
+                <br>
+                <input class="submit" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
     {% for user in users %} 
     <div class="user">
-        <p>User: {{ loop.index }}<br>{{ user }}</p>
-        <p><a href="{{ url_for('get_favourites', user_id=users[user]) }}">Favourite Movies</a>
-            <a class='delete userbutton' href="{{ url_for('delete_user', user_id=users[user]) }}">Delete</a></p>
+        <p>User: {{ loop.index }}</p>
+        <h2>{{ user }}</h2>
+        <p><a class="favourites minibutton" href="{{ url_for('get_favourites', user_id=users[user]) }}">Show Favourite Movies</a>
+            <a class="delete minibutton" href="{{ url_for('delete_user', user_id=users[user]) }}">Delete</a></p>
     </div>
     {% endfor %}
 </body>
