@@ -52,9 +52,18 @@ class JsonDataManager(DMI):
     
     def add_movie(self, user_id, title, rating, year, director, image_url):
         users = self.read_data()
-        users[user_id]["movies"][self.unique_id(user_id)] = {"title": title, "rating": rating, "year": year, "director": director, "image_url": image_url}
-        self.write_new_data(users)
-        return "SUCCESS"
+        list_of_movies = []
+        flag = True
+        for movie_id, movie in users[user_id]['movies'].items():
+            if movie["title"] == title:
+                flag = False
+                break
+        if flag:
+            users[user_id]["movies"][self.unique_id(user_id)] = {"title": title, "rating": rating, "year": year, "director": director, "image_url": image_url}
+            self.write_new_data(users)
+            return False
+        else:
+            return True
 
     def delete_movie(self, user_id, movie_id):
         users = self.read_data()

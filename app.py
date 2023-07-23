@@ -35,40 +35,29 @@ def get_favourites(user_id):
     user = data_manager.get_user_by_id(user_id)['name']
     return render_template('user_movies.html', movies=movies, user=user, user_id=user_id)
 
-@app.route('/add_user', methods=['GET', 'POST'])
+@app.route('/add_user', methods=['POST'])
 def add_user():
-    if request.method == 'POST':
-        checkbox_data = request.form.getlist('yesno')
-        name = request.form['name']
-        user_id = data_manager.add_user(name)
-        if 'yes' in checkbox_data:
-            return render_template('add_movie.html', user_id=user_id)
-        else:
-            return list_users(False)
-    else:
-        return render_template('add_user.html')
+    name = request.form['name']
+    user_id = data_manager.add_user(name)
+    return list_users(False)
 
-@app.route('/users/<user_id>/add_movie', methods=['GET', 'POST'])
+@app.route('/users/<user_id>/add_movie', methods=['POST'])
 def add_movie(user_id):
-    if request.method == 'POST':
-        title = request.form['title']
-        checkbox_data = request.form.getlist('yesno')
-        payload = {'apikey': '3d01cfe1', 't': title}
-        response = requests.get('http://www.omdbapi.com/', params=payload)
-        if response.status_code != 200:
-            return render_template('error.html', header='External api not responding', message='Sorry, the api for fetching movie information is not available,\n please try again later.')
-        else:
-            content = response.json()
-        if 'Error' in content:
-            return render_template('error.html', header='Movie not found', message='Sorry, the movie you were looking for could not be found.')
-        else:
-            data_manager.add_movie(user_id, title, content['imdbRating'], content['Year'], content['Director'], content['Poster'])
-        if 'yes' in checkbox_data:
-            return render_template('add_movie.html', user_id=user_id)
+    title = request.form['title']
+    payload = {'apikey': '3d01cfe1', 't': title}
+    response = requests.get('http://www.omdbapi.com/', params=payload)
+    if response.status_code != 200:
+        return render_template('error.html', header='External api not responding', message='Sorry, the api for fetching movie information is not available,\n please try again later.')
+    else:
+        content = response.json()
+    if 'Error' in content:
+        return render_template('error.html', header='Movie not found', message='Sorry, the movie you were looking for could not be found.')
+    else:
+        duplicate = data_manager.add_movie(user_id, title, content['imdbRating'], content['Year'], content['Director'], content['Poster'])
+        if duplicate:
+            return render_template('error.html', header='Cannot Add Duplicate', message='Movie is already listed in the users favourite movies database, enter new movies only.')
         else:
             return get_favourites(user_id)
-    else:
-        return render_template('add_movie.html', user_id=user_id)
 
 @app.route('/users/<user_id>/update_movie/<movie_id>', methods=['POST', 'GET'])
 def update_movie(user_id, movie_id):

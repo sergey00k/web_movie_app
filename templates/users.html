@@ -11,15 +11,19 @@
 <body>
     <div class="header">
         <div class="left-header">
-            <a class="home button" href="{{ url_for('home') }}">Home</a>
-            <a class="add button" href="{{ url_for('add_user') }}">Add User</a>
+            <a class="home" href="{{ url_for('home') }}">Home</a>
+            <form class="form" action="/add_user" method="POST">
+                <label class="form-text" for="name">Name: </label>
+                <input class="form-field" type="text" id="name" name="name" required>
+                <input class="submit" type="submit" value="Add User">
+            </form>
         </div>
         <div class="right-header">
-            <form class="search-form" action="/users" method="POST">
-                <label class="search-text" for="search">Search for user by name: </label>
-                <input class="search-field" type="text" id="search" name="search" required>
+            <form class="form" action="/users" method="POST">
+                <label class="form-text" for="search">Search for user by name: </label>
+                <input class="form-field" type="text" id="search" name="search" required>
                 <br>
-                <input class="submit" type="submit" value="Submit">
+                <input class="submit" type="submit" value="Search">
             </form>
         </div>
     </div>
@@ -28,7 +32,7 @@
         <p>User: {{ loop.index }}</p>
         <h2>{{ user }}</h2>
         <p><a class="favourites minibutton" href="{{ url_for('get_favourites', user_id=users[user]) }}">Show Favourite Movies</a>
-            <a class="delete minibutton" href="{{ url_for('delete_user', user_id=users[user]) }}">Delete</a></p>
+            <a class="delete minibutton" href="{{ url_for('delete_user', user_id=users[user]) }}">Delete User</a></p>
     </div>
     {% endfor %}
 </body>

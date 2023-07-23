@@ -1,0 +1,40 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    font-family: "inter", sans-serif;
+    background-color: #F5F5F5;
+    color: #000;
+}
+
+.button {
+    margin: 10px;
+    text-decoration: none;
+    padding: 8px;
+    background-clip: padding-box;
+    width: 80px;
+    height: 25px;
+    background-color: gold;
+    border-radius: 30px;
+    text-align: center;
+    font-size: large;
+    text-decoration: none;
+    align-self: center;
+    font-size: large;
+}
+
+.header {
+    justify-content: space-between;
+    display: flex;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    height: 100px;
+}
+
+.error-text {
+    margin-left: 20px;
+}
