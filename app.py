@@ -3,7 +3,7 @@ from database.db_algos.json_algo import JsonDataManager
 import requests
 
 app = Flask(__name__)
-data_manager = JsonDataManager("/Users/sk/Desktop/Masterschool/web_movie_app/database/db_files/db.json")
+data_manager = JsonDataManager("database/db_files/db.json")
 
 @app.route('/home')
 def home():
